@@ -10,6 +10,7 @@ const manrope = Manrope({
   weights: [400, 500, 600, 700],
   styles: ["normal", "italic"],
   subsets: ["latin"],
+  variable: "--font-manrope"
 });
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
