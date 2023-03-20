@@ -1,15 +1,15 @@
-import Question from "../../../backend/models/questionModel";
 import getSession from "../../../backend/getSession";
 import connectToDb from "../../../backend/connectToDb";
+import Hackathon from "../../../backend/models/hackatonModel";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
-      const { question, options, answer, category } = req.body;
+      const { name, version } = req.body;
 
-      if (!question || !options || !answer || !category) {
+      if (!name || !version) {
         return res.status(400).json({
-          message: "All question parameters must be filled!",
+          message: "All hackathon parameters must be filled!",
           status: "error",
         });
       }
@@ -21,15 +21,13 @@ export default async function handler(req, res) {
           .status(401)
           .json({ message: "Unauthorized", status: "error" });
 
-      await Question.create({
-        question,
-        options,
-        answer,
-        category,
+      await Hackathon.create({
+        name,
+        version,
       });
       res.status(201).json({
         status: "success",
-        message: "Question created successfully",
+        message: "Hackathon created successfully",
       });
     } catch (error) {
       console.log(error.message);

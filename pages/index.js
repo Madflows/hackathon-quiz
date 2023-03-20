@@ -3,17 +3,19 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 
 const Home = () => {
-  return (
-    <div className="">
-      <h1>
-        User registers first. After registration, they are redirected
-        <Link href="/onboarding">to the onboarding screen</Link>
-      </h1>
-    </div>
-  );
+  return <main className="min-h-full flex justify-center items-center"></main>;
 };
 
 export default Home;
 
 //  to protect this page from unauthorized access
 // Home.auth = true;
+
+export const getServerSideProps = async () => {
+  return {
+    redirect: {
+      destination: "/sign-up",
+      permanent: false,
+    },
+  };
+};
